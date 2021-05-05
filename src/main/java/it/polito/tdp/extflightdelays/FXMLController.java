@@ -35,7 +35,25 @@ public class FXMLController {
 
     @FXML
     void doAnalizzaAeroporti(ActionEvent event) {
-    	//TODO
+    	
+    	String dist = this.distanzaMinima.getText();
+    	double dMin = 0.0;
+    	
+    	if(dist==null) {
+    		this.txtResult.setText("Devi inserire una distanza media percorsa minima");
+    	}
+    	
+    	try {
+    		dMin = Double.parseDouble(dist);
+    	} catch(NumberFormatException e) {
+    		this.txtResult.setText("La distanza media percorsa minima deve essere un valore numerico");
+    	}
+    	
+    	model.creaGrafo(dMin);
+    	
+    	this.txtResult.setText(model.getInfoGrafo());
+    	this.txtResult.appendText(model.getArchiPeso());
+    	
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
